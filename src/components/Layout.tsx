@@ -199,11 +199,11 @@ export default function Layout({ children }: LayoutProps) {
             <div>
               <h3 className="text-lg font-semibold mb-4">Paiement</h3>
               <p className="text-gray-300">Orange Money: +226 56 63 03 58</p>
-              <p className="text-gray-300 mt-2">PayDunya accepté</p>
+              <p className="text-gray-300 mt-2">Cinetpay accepté</p>
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-            <p className="text-gray-300">&copy; 2024 EWES. Tous droits réservés.</p>
+            <p className="text-gray-300">© {new Date().getFullYear()} EWES. Tous droits réservés.</p>
           </div>
         </div>
       </footer>

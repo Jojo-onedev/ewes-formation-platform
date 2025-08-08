@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Layout from '../../components/Layout'
-import { useAdmin } from '../../context/AdminContext'
+import Layout from '../../src/components/Layout'
+import { useAdmin } from '../../src/context/AdminContext'
 import { Shield, Lock, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
