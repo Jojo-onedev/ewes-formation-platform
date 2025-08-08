@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Layout from '../../../../components/Layout'
-import { useAdmin } from '../../../../context/AdminContext'
-import { useFormations } from '../../../../context/FormationContext'
+import Layout from '../../../../src/components/Layout'
+import { useAdmin } from '../../../../src/context/AdminContext'
+import { useFormations } from '../../../../src/context/FormationContext'
 import { Save, X, Info } from 'lucide-react'
 import Link from 'next/link'
 
