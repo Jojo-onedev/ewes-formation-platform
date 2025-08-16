@@ -189,7 +189,7 @@ export default function Layout({ children }: LayoutProps) {
               <h3 className="text-lg font-semibold mb-4">Contact</h3>
               <p className="text-gray-300 flex items-center">
                 <Phone className="mr-2 h-4 w-4" />
-                68 84 92 72 / 51 40 07 55
+                +226 56 63 03 58 / +226 71 35 57 94
               </p>
               <p className="text-gray-300 mt-2 flex items-center">
                 <MessageCircle className="mr-2 h-4 w-4" />
@@ -199,6 +199,8 @@ export default function Layout({ children }: LayoutProps) {
             <div>
               <h3 className="text-lg font-semibold mb-4">Paiement</h3>
               <p className="text-gray-300">Orange Money: +226 56 63 03 58</p>
+              <p className="text-gray-300">Wave: +226 56 63 03 58</p>
+              <p className="text-gray-300">Moov Money: +226 71 35 57 94</p>
               <p className="text-gray-300 mt-2">Cinetpay accepté</p>
             </div>
           </div>

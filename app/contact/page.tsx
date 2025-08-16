@@ -48,8 +48,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">Téléphone</h3>
-                  <p className="text-gray-600">68 84 92 72</p>
-                  <p className="text-gray-600">51 40 07 55</p>
+                  <p className="text-gray-600">+226 56 63 03 58</p>
+                  <p className="text-gray-600">+226 71 35 57 94</p>
                 </div>
               </div>
               
@@ -71,6 +71,16 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-semibold text-gray-900">Paiement Orange Money</h3>
                   <p className="text-gray-600">+226 56 63 03 58</p>
+                  <p className="text-sm text-gray-500">Envoyez votre preuve de paiement par WhatsApp</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Paiement wave</h3>
+                  <p className="text-gray-600">+226 56 63 03 58</p>
+                  <p className="text-sm text-gray-500">Envoyez votre preuve de paiement par wave</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Paiement Moov Money</h3>
+                  <p className="text-gray-600">+226 71 35 57 94</p>
                   <p className="text-sm text-gray-500">Envoyez votre preuve de paiement par WhatsApp</p>
                 </div>
               </div>
