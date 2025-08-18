@@ -244,7 +244,7 @@ export default function AboutPage() {
                   className="object-cover"
                 />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900">[Nom du PDG]</h3>
+              <h3 className="text-xl font-semibold text-gray-900">SEBGO Tegawendé Jean</h3>
               <p className="text-ewes-blue font-medium">Directeur Général</p>
             </div>
 
@@ -258,7 +258,7 @@ export default function AboutPage() {
                   className="object-cover"
                 />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900">[Nom de la Secrétaire]</h3>
+              <h3 className="text-xl font-semibold text-gray-900">YAMEOGO Koudraogo</h3>
               <p className="text-ewes-blue font-medium">Secrétaire de Direction</p>
             </div>
           </div>
