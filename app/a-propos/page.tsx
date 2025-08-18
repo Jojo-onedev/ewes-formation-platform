@@ -1,10 +1,58 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import Layout from '../../src/components/Layout'
-import { Users, Award, Target, CheckCircle, Calendar, MapPin, Phone } from 'lucide-react'
+import { Award, Target, CheckCircle, Calendar, MapPin, Phone, ChevronLeft, ChevronRight, Users } from 'lucide-react'
 import Image from 'next/image'
 
 export default function AboutPage() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const slideRef = useRef<HTMLDivElement>(null);
+
+  const goToSlide = (index: number) => {
+    if (index < 0) index = 0;
+    if (index >= slides.length) index = slides.length - 1;
+    
+    setCurrentSlide(index);
+    
+    if (slideRef.current) {
+      // On calcule la translation en fonction du nombre de diapositives visibles (3 par vue)
+      const visibleSlides = 3;
+      const slideWidth = 100 / visibleSlides;
+      slideRef.current.style.transform = `translateX(-${index * slideWidth}%)`;
+    }
+  };
+
+  const nextSlide = () => goToSlide(currentSlide + 1);
+  const prevSlide = () => goToSlide(currentSlide - 1);
+
+  // Gestion du défilement automatique
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const nextSlideIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+      goToSlide(nextSlideIndex);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [currentSlide, slides.length]);
+
+  // Auto-advance slides
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 5000);
+    
+    return () => clearInterval(timer);
+  }, [currentSlide]);
+
+  // Initialize slider position
+  useEffect(() => {
+    if (slideRef.current) {
+      slideRef.current.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+  }, []);
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -181,105 +229,128 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Notre Équipe */}
+      {/* Équipe de Direction */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Notre Équipe de Direction</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* PDG */}
+            <div className="text-center">
+              <div className="relative h-80 w-full max-w-md mx-auto mb-4 rounded-lg overflow-hidden shadow-lg">
+                <Image 
+                  src="/images/temoignages/pdg.jpeg" 
+                  alt="PDG EWES"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900">[Nom du PDG]</h3>
+              <p className="text-ewes-blue font-medium">Directeur Général</p>
+            </div>
+
+            {/* Secrétaire */}
+            <div className="text-center">
+              <div className="relative h-80 w-full max-w-md mx-auto mb-4 rounded-lg overflow-hidden shadow-lg">
+                <Image 
+                  src="/images/temoignages/secretaire.jpeg" 
+                  alt="Secrétaire EWES"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900">[Nom de la Secrétaire]</h3>
+              <p className="text-ewes-blue font-medium">Secrétaire de Direction</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Équipe Technique */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Notre Équipe</h2>
-            <p className="text-lg text-gray-600">Des professionnels expérimentés à votre service</p>
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Notre Équipe Technique</h2>
+          <div className="relative h-96 w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl mb-8">
+            <Image 
+              src="/images/temoignages/equipe.jpeg" 
+              alt="Équipe Technique EWES"
+              fill
+              className="object-fill"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+              <p className="text-white text-xl md:text-2xl font-semibold text-center px-4">
+                Notre équipe de formateurs experts en électricité, dédiée à votre réussite professionnelle.
+              </p>
+            </div>
           </div>
+          <p className="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+            Notre équipe technique est composée de professionnels certifiés avec une solide expérience sur le terrain. 
+            Ils mettent leur expertise à votre service pour vous offrir une formation de qualité adaptée aux réalités du marché.
+          </p>
+        </div>
+      </section>
+
+      {/* Témoignages */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Témoignages de nos stagiaires</h2>
           
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-2xl font-semibold mb-4">Formateurs Experts</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <CheckCircle className="text-ewes-primary mr-3 h-5 w-5 mt-1 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium">Plus de 10 ans d'expérience</p>
-                      <p className="text-sm text-gray-600">Dans le domaine de l'électricité industrielle et résidentielle</p>
+          <div className="relative w-full max-w-4xl mx-auto overflow-hidden">
+            <div className="relative overflow-hidden">
+              <div 
+                ref={slideRef}
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ width: `${(slides.length / 3) * 100}%` }}
+              >
+                {slides.map((num, index) => (
+                  <div 
+                    key={index} 
+                    className="flex-shrink-0"
+                    style={{ width: '33.333%', padding: '0 0.5rem' }}
+                  >
+                    <div className="bg-white rounded-xl shadow-lg p-6 h-full">
+                      <div className="relative h-64 w-full mb-6 rounded-lg overflow-hidden bg-gray-100">
+                        <Image 
+                          src={`/images/temoignages/temoignage${num}.jpeg`} 
+                          alt={`Témoignage ${num}`}
+                          fill
+                          className="object-contain p-4"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                        />
+                      </div>
+                      <p className="text-gray-700 italic mb-4">
+                        "Formation de qualité avec des formateurs à l'écoute. J'ai pu acquérir des compétences concrètes que j'utilise quotidiennement dans mon travail."
+                      </p>
+                      <p className="font-semibold text-ewes-blue">Ancien stagiaire</p>
                     </div>
                   </div>
-                  
-                  <div className="flex items-start">
-                    <CheckCircle className="text-ewes-primary mr-3 h-5 w-5 mt-1 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium">Certifications internationales</p>
-                      <p className="text-sm text-gray-600">Formés aux normes et standards internationaux</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <CheckCircle className="text-ewes-primary mr-3 h-5 w-5 mt-1 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium">Pédagogie adaptée</p>
-                      <p className="text-sm text-gray-600">Méthodes d'enseignement modernes et efficaces</p>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
               
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="font-semibold mb-4">Domaines d'expertise</h4>
-                <div className="space-y-2">
-                  <div className="flex items-center">
-                    <div className="relative w-4 h-4 mr-2 flex-shrink-0">
-                      <Image 
-                        src="/images/logo.jpeg" 
-                        alt="" 
-                        fill 
-                        className="rounded-full object-cover"
-                      />
-                    </div>
-                    <span className="text-sm">Installation électrique résidentielle</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="relative w-4 h-4 mr-2 flex-shrink-0">
-                      <Image 
-                        src="/images/logo.jpeg" 
-                        alt="" 
-                        fill 
-                        className="rounded-full object-cover"
-                      />
-                    </div>
-                    <span className="text-sm">Électricité industrielle</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="relative w-4 h-4 mr-2 flex-shrink-0">
-                      <Image 
-                        src="/images/logo.jpeg" 
-                        alt="" 
-                        fill 
-                        className="rounded-full object-cover"
-                      />
-                    </div>
-                    <span className="text-sm">Maintenance préventive</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="relative w-4 h-4 mr-2 flex-shrink-0">
-                      <Image 
-                        src="/images/logo.jpeg" 
-                        alt="" 
-                        fill 
-                        className="rounded-full object-cover"
-                      />
-                    </div>
-                    <span className="text-sm">Normes de sécurité</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="relative w-4 h-4 mr-2 flex-shrink-0">
-                      <Image 
-                        src="/images/logo.jpeg" 
-                        alt="" 
-                        fill 
-                        className="rounded-full object-cover"
-                      />
-                    </div>
-                    <span className="text-sm">Énergies renouvelables</span>
-                  </div>
-                </div>
-              </div>
+              <button 
+                onClick={prevSlide}
+                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg z-10 -ml-4 hover:bg-gray-100 transition-colors"
+                aria-label="Témoignage précédent"
+              >
+                <ChevronLeft className="h-6 w-6 text-ewes-blue" />
+              </button>
+              <button 
+                onClick={nextSlide}
+                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg z-10 -mr-4 hover:bg-gray-100 transition-colors"
+                aria-label="Témoignage suivant"
+              >
+                <ChevronRight className="h-6 w-6 text-ewes-blue" />
+              </button>
+            </div>
+            
+            <div className="flex justify-center mt-6 space-x-2">
+              {slides.map((_, index) => (
+                <button 
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-ewes-blue w-8' : 'bg-gray-300 w-3'}`}
+                  aria-label={`Aller au témoignage ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
